@@ -12,7 +12,7 @@ const romPath = path.join(process.cwd(), "public", "roms")
 // SERVIR ROMS
 app.use("/roms", express.static(romPath))
 
-// SERVIR REACT
+// SERVIR SITE REACT
 app.use(express.static("dist"))
 
 app.get("/api/roms", (req, res) => {
@@ -36,7 +36,7 @@ app.get("/api/roms", (req, res) => {
 
 })
 
-// REACT ROUTER (SPA)
+// React Router
 app.get("*", (req, res) => {
   res.sendFile(path.join(process.cwd(), "dist", "index.html"))
 })

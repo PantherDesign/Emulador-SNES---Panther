@@ -7,7 +7,7 @@ export default function GameList(){
 
   useEffect(()=>{
 
-    fetch("http://localhost:3001/api/roms")
+    fetch("/api/roms")
       .then(res=>res.json())
       .then(data=>setGames(data))
 

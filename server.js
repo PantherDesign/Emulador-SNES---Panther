@@ -7,6 +7,9 @@ const app = express()
 
 app.use(cors())
 
+// SERVIR ARQUIVOS DA PASTA PUBLIC
+app.use(express.static("public"))
+
 const romPath = path.join(process.cwd(), "public", "roms")
 
 // SERVIR ROMS

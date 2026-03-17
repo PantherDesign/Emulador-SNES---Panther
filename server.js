@@ -13,6 +13,9 @@ app.use(express.static("dist"))
 // SERVIR ROMS
 app.use("/roms", express.static("public/roms"))
 
+// SERVIR SITE REACT
+app.use(express.static("dist"))
+
 const romPath = path.join(process.cwd(), "public/roms")
 
 app.get("/api/roms", (req, res) => {

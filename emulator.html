@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Panther</title>
+<style>
+
+body{
+margin:0;
+background:black;
+}
+
+#game{
+width:100vw;
+height:100vh;
+}
+
+
+
+.ejs_start_button{
+
+background:url("/start.png") no-repeat center !important;
+background-size:contain !important;
+width:120px !important;
+height:120px !important;
+border:none !important;
+color:transparent !important;
+font-size:0 !important;
+cursor:pointer !important;
+position:absolute !important;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+
+}
+
+
+.ejs_start_button::before{
+
+content:"";
+background:url("/source.gif") no-repeat center;
+background-size:contain;
+width:200px;
+height: 100px;
+position:absolute;
+bottom:140px; 
+left:50%;
+transform:translateX(-50%);
+
+}
+
+.ejs_start_button:hover{
+
+box-shadow:none !important;
+filter:none !important;
+
+}
+
+
+.panther-credit{
+
+position:absolute;
+
+bottom:30px; 
+
+left:50%;
+
+transform:translateX(-50%);
+
+text-align:center;
+
+color:white;
+
+font-family:"RetroGaming", sans-serif;
+
+opacity:0.8;
+
+}
+
+.panther-credit p{
+
+margin:0;
+font-size:14px;
+font-family:"RetroGaming", sans-serif;
+
+}
+
+.panther-credit img{
+width:120px;
+margin-top:10px;
+
+
+}
+
+
+
+
+.ejs_popup_submit{
+
+background:black !important;
+border:2px solid #bf77ff !important;
+color:#bf77ff !important;
+
+}
+</style>
+
+
+
+</head>
+
+
+<body>
+
+<div id="game"></div>
+
+<div class="panther-credit" id="panther-credit">
+  <p>Desenvolvido por:</p>
+  <img src="/panther.png">
+</div>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search)
+const rom = urlParams.get("rom")
+
+EJS_player = "#game"
+EJS_core = "snes"
+EJS_gameUrl = "/roms/" + rom;
+EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/"
+EJS_language = "pt-BR"
+EJS_languagePath = "/emulator-lang/"
+EJS_disableLocalFiles = true
+
+
+
+EJS_onExit = function () {
+  window.location.href = "/";
+};
+
+</script>
+
+<script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
+
+
+
+<script>
+
+document.addEventListener("click", function(e){
+
+  if(e.target.classList.contains("ejs_start_button")){
+
+    const credits = document.getElementById("panther-credit")
+
+    if(credits){
+      credits.style.display = "none"
+    }
+
+  }
+
+})
+
+</script>
+
+
+
+
+<script>
+
+const observer = new MutationObserver(() => {
+
+  // traduz título
+  const title = document.querySelector(".ejs_cheat_heading");
+  if (title && title.innerText.includes("Are you sure")) {
+    title.innerText = "Tem certeza que deseja sair do jogo?";
+  }
+
+  // traduz botões
+  const buttons = document.querySelectorAll(".ejs_popup_submit");
+
+  buttons.forEach(btn => {
+
+    if(btn.innerText === "Exit"){
+      btn.innerText = "Sair";
+    }
+
+    if(btn.innerText === "Cancel"){
+      btn.innerText = "Cancelar";
+    }
+
+  });
+
+
+  
+
+});
+
+
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -7,6 +7,12 @@ const app = express()
 
 app.use(cors())
 
+// SERVIR BUILD DO REACT
+app.use(express.static("dist"))
+
+// SERVIR ROMS
+app.use("/roms", express.static("public/roms"))
+
 const romPath = path.join(process.cwd(), "public/roms")
 
 app.get("/api/roms", (req, res) => {
@@ -30,6 +36,13 @@ app.get("/api/roms", (req, res) => {
 
 })
 
-app.listen(3001, () => {
-  console.log("Servidor de ROMs rodando em http://localhost:3001")
+// REACT ROUTER (SPA)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "dist", "index.html"))
+})
+
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`)
 })

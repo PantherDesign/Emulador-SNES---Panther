@@ -7,16 +7,13 @@ const app = express()
 
 app.use(cors())
 
-// SERVIR BUILD DO REACT
-app.use(express.static("dist"))
+const romPath = path.join(process.cwd(), "public", "roms")
 
 // SERVIR ROMS
-app.use("/roms", express.static("public/roms"))
+app.use("/roms", express.static(romPath))
 
-// SERVIR SITE REACT
+// SERVIR REACT
 app.use(express.static("dist"))
-
-const romPath = path.join(process.cwd(), "public/roms")
 
 app.get("/api/roms", (req, res) => {
 
